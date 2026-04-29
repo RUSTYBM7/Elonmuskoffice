@@ -16,6 +16,17 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
 
+## Artifacts
+
+### Elon Musk Official (`artifacts/elon-musk-official/`)
+- **Kind**: React + Vite web app (previewPath `/`)
+- **Stack**: React, Vite, Tailwind CSS v4, framer-motion, wouter, react-icons/fa6, lucide-react, @tanstack/react-query, shadcn/ui
+- **Routes**: `/` (Home), `/contact` (Contact — opens in new tab from header)
+- **Assets**: Portrait + SpaceX video in `attached_assets/` (aliased as `@assets`); venture images in `src/assets/` (aliased as `@/assets`)
+- **Theme**: Light/dark toggle, stored in localStorage as `"elon-theme"`, dark uses red primary (`hsl(351 80% 49%)`)
+- **Components**: Header, Hero (video bg), PortraitSection, Bio, Forbes, Timeline, Ventures, Vision, Newsletter, PressTicker, QuotesMarquee, Footer
+- **Custom domain**: `elonmuskoffice.space` (set via Replit deployment custom domain UI after publishing)
+
 ## Key Commands
 
 - `pnpm run typecheck` — full typecheck across all packages
