@@ -2,13 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { CheckCircle } from "lucide-react";
+
+const STORAGE_KEY = "emo_newsletter_subscribed";
 
 const upcoming2026 = [
   { tag: "Q1 2026", title: "Tesla Cybertruck production milestone", company: "Tesla" },
   { tag: "Q1 2026", title: "Starship orbital refueling demonstration", company: "SpaceX" },
   { tag: "Q2 2026", title: "Neuralink expanded human trial cohort", company: "Neuralink" },
-  { tag: "Q2 2026", title: "𝕏 Payments rollout", company: "𝕏" },
+  { tag: "Q2 2026", title: "𝕏 Payments global rollout", company: "𝕏" },
   { tag: "Q3 2026", title: "Tesla Robotaxi network expansion", company: "Tesla" },
   { tag: "Q3 2026", title: "Grok 4 multimodal release", company: "xAI" },
   { tag: "Q4 2026", title: "Mars cargo mission readiness review", company: "SpaceX" },
@@ -18,11 +20,20 @@ const upcoming2026 = [
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
-  const { toast } = useToast();
+  const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const pausedRef = useRef(false);
 
-  // Auto-scroll while still allowing manual horizontal scroll
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) setSubscribed(true);
+    } catch {
+    }
+  }, []);
+
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -54,14 +65,32 @@ export default function Newsletter() {
     };
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    toast({
-      title: "Subscribed",
-      description: "You will receive Elon Musk's 2026 updates in your inbox.",
-    });
-    setEmail("");
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setError("");
+    setLoading(true);
+
+    try {
+      const existing = JSON.parse(localStorage.getItem("emo_subscribers") || "[]") as string[];
+      if (!existing.includes(email)) {
+        existing.push(email);
+        localStorage.setItem("emo_subscribers", JSON.stringify(existing));
+      }
+      localStorage.setItem(STORAGE_KEY, "1");
+      setSubscribed(true);
+    } catch {
+      setSubscribed(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -84,29 +113,53 @@ export default function Newsletter() {
             your inbox throughout 2026.
           </p>
 
-          <form
-            onSubmit={handleSubmit}
-            className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-          >
-            <Input
-              type="email"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="h-12 bg-background border-input rounded-none focus-visible:ring-foreground"
-              required
-            />
-            <Button
-              type="submit"
-              className="h-12 px-8 rounded-none bg-foreground text-background hover:bg-foreground/90 uppercase tracking-[0.14em] text-xs font-medium"
+          {subscribed ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              className="mt-8 flex flex-col items-center gap-3 py-6"
             >
-              Subscribe
-            </Button>
-          </form>
+              <CheckCircle className="w-8 h-8 text-foreground dark:text-primary" />
+              <p className="text-base font-medium tracking-tight text-foreground">
+                You&rsquo;re subscribed
+              </p>
+              <p className="text-sm text-foreground/60">
+                You&rsquo;ll receive 2026 updates from Elon Musk&rsquo;s ventures in your inbox.
+              </p>
+            </motion.div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+            >
+              <div className="flex-1 flex flex-col gap-1">
+                <Input
+                  type="email"
+                  placeholder="Email address"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); setError(""); }}
+                  className="h-12 bg-background border-input rounded-none focus-visible:ring-foreground"
+                  required
+                  disabled={loading}
+                />
+                {error && (
+                  <p className="text-xs text-left text-red-500">{error}</p>
+                )}
+              </div>
+              <Button
+                type="submit"
+                disabled={loading}
+                className="h-12 px-8 rounded-none bg-foreground text-background hover:bg-foreground/90 uppercase tracking-[0.14em] text-xs font-medium disabled:opacity-60"
+              >
+                {loading ? "..." : "Subscribe"}
+              </Button>
+            </form>
+          )}
         </motion.div>
       </div>
 
-      {/* Coming-up auto-scrolling row (also manually scrollable) */}
+      {/* Coming-up auto-scrolling row */}
       <div className="mt-14 md:mt-16 max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between mb-5">
           <p className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground">

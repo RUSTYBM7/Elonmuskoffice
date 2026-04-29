@@ -3,8 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 
 const stats = [
   { label: "Forbes Real-Time Rank", value: "#1" },
-  { label: "Estimated Net Worth", value: "$400B+" },
-  { label: "Source of Wealth", value: "Tesla, SpaceX" },
+  { label: "Estimated Net Worth", value: "$300B–$800B" },
+  { label: "Source of Wealth", value: "Tesla, SpaceX, xAI" },
   { label: "Residence", value: "Austin, Texas" },
 ];
 
@@ -29,8 +29,9 @@ export default function Forbes() {
             <p className="mt-4 max-w-2xl text-sm md:text-base text-foreground/75 leading-relaxed">
               Per Forbes' Real-Time Billionaires list, Elon Musk holds the
               position of the wealthiest person in the world. His fortune is
-              anchored by Tesla, where he is the largest shareholder, and by
-              SpaceX, the most valuable private aerospace company on the planet.
+              anchored by Tesla, where he is the largest shareholder, SpaceX,
+              the most valuable private aerospace company on the planet, and xAI,
+              whose Grok model ranks among the world's leading AI systems.
             </p>
           </div>
 

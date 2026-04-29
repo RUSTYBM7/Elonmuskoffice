@@ -21,8 +21,8 @@ const explore = [
 
 const socials = [
   { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/message/673TLPEML5VVP1" },
-  { icon: FaXTwitter, label: "𝕏", href: "https://x.com/Mayemuskliving4" },
-  { icon: Mail, label: "Email", href: "mailto:elon0147@att.net" },
+  { icon: FaXTwitter, label: "𝕏", href: "https://x.com/elonmusk" },
+  { icon: Mail, label: "Email", href: "mailto:info@elonmuskoffice.space" },
   { icon: FaTelegram, label: "Telegram", href: "https://t.me/realelonrmusk7" },
 ];
 
@@ -111,10 +111,10 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-foreground/75">
               <li>
                 <a
-                  href="mailto:elon0147@att.net"
+                  href="mailto:info@elonmuskoffice.space"
                   className="hover:text-foreground dark:hover:text-primary transition-colors"
                 >
-                  elon0147@att.net
+                  info@elonmuskoffice.space
                 </a>
               </li>
               <li>
@@ -139,12 +139,12 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://x.com/Mayemuskliving4"
+                  href="https://x.com/elonmusk"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-foreground dark:hover:text-primary transition-colors"
                 >
-                  𝕏 / @Mayemuskliving4
+                  𝕏 / @elonmusk
                 </a>
               </li>
               <li className="pt-2 text-xs text-muted-foreground">

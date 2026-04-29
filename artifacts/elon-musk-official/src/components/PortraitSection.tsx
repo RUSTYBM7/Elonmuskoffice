@@ -6,8 +6,8 @@ import portrait from "@assets/IMG_9847_1777265766177.jpeg";
 
 const socialLinks = [
   { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/message/673TLPEML5VVP1" },
-  { icon: FaXTwitter, label: "𝕏", href: "https://x.com/Mayemuskliving4" },
-  { icon: Mail, label: "Email", href: "mailto:elon0147@att.net" },
+  { icon: FaXTwitter, label: "𝕏", href: "https://x.com/elonmusk" },
+  { icon: Mail, label: "Email", href: "mailto:info@elonmuskoffice.space" },
   { icon: FaTelegram, label: "Telegram", href: "https://t.me/realelonrmusk7" },
 ];
 

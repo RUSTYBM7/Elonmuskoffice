@@ -1,0 +1,8 @@
+{
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "buildCommand": "pnpm --filter @workspace/elon-musk-official run build",
+  "outputDirectory": "artifacts/elon-musk-official/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
