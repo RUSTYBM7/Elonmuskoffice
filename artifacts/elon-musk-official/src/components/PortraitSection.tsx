@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { FaXTwitter, FaWhatsapp, FaTelegram } from "react-icons/fa6";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import portrait from "@assets/IMG_9847_1777265766177.jpeg";
+import portrait from "/attached_assets/IMG_1425.JPG";
 
 const socialLinks = [
   { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/+18032587511" },
@@ -36,7 +36,7 @@ export default function PortraitSection() {
             <div className="relative w-full h-full overflow-hidden bg-muted shadow-xl">
               <img
                 src={portrait}
-                alt="Elon Reeves Musk"
+                alt="Elon Musk"
                 className="w-full h-full object-cover"
               />
             </div>

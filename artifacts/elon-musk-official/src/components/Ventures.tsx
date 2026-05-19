@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import teslaCar from "@/assets/tesla-car.png";
-import spacexRocket from "@/assets/spacex-rocket.png";
-import neuralinkLogo from "@/assets/neuralink.png";
+import teslaLogo from "@/assets/tesla-brand-logo.svg";
+import spacexLogo from "@/assets/spacex-brand-logo.png";
+import neuralinkLogo from "@/assets/neuralink-brand-logo.svg";
 import boringLogo from "@/assets/boring-company.png";
 import xaiLogo from "@/assets/xai.png";
 import xLogo from "@/assets/x-com.png";
@@ -10,58 +10,51 @@ import starlinkLogo from "@/assets/starlink.png";
 const ventures = [
   {
     name: "Tesla",
-    logo: teslaCar,
+    logo: teslaLogo,
     role: "Technoking & CEO",
-    description:
-      "Accelerating the world's transition to sustainable energy with electric vehicles, solar generation and integrated energy storage.",
+    description: "Accelerating the world's transition to sustainable energy with electric vehicles, solar generation and integrated energy storage.",
     href: "https://www.tesla.com",
   },
   {
     name: "SpaceX",
-    logo: spacexRocket,
+    logo: spacexLogo,
     role: "Founder, CEO & Chief Engineer",
-    description:
-      "Designing, manufacturing and launching advanced rockets and spacecraft. The ultimate goal: enabling humanity to live on other planets.",
+    description: "Designing, manufacturing and launching advanced rockets and spacecraft. The ultimate goal: enabling humanity to live on other planets.",
     href: "https://www.spacex.com",
   },
   {
     name: "Neuralink",
     logo: neuralinkLogo,
     role: "Co-founder",
-    description:
-      "Developing ultra-high bandwidth brain-machine interfaces to connect humans and computers.",
+    description: "Developing ultra-high bandwidth brain-machine interfaces to connect humans and computers.",
     href: "https://neuralink.com",
   },
   {
     name: "The Boring Company",
     logo: boringLogo,
     role: "Founder",
-    description:
-      "Solving traffic, transforming cities and enabling rapid point-to-point transportation through next-generation tunnels.",
+    description: "Solving traffic, transforming cities and enabling rapid point-to-point transportation through next-generation tunnels.",
     href: "https://www.boringcompany.com",
   },
   {
     name: "xAI",
     logo: xaiLogo,
     role: "Founder",
-    description:
-      "Building artificial intelligence to accelerate human scientific discovery and understand the true nature of the universe.",
+    description: "Building artificial intelligence to accelerate human scientific discovery and understand the true nature of the universe.",
     href: "https://x.ai",
   },
   {
     name: "𝕏 (Twitter/X)",
     logo: xLogo,
     role: "Executive Chairman & CTO",
-    description:
-      "The everything app — a global digital town square for conversation, news, finance and creators.",
+    description: "The everything app — a global digital town square for conversation, news, finance and creators.",
     href: "https://x.com",
   },
   {
     name: "Starlink",
     logo: starlinkLogo,
     role: "SpaceX Constellation",
-    description:
-      "Delivering high-speed broadband internet to locations where access has been unreliable, expensive, or completely unavailable.",
+    description: "Delivering high-speed broadband internet to locations where access has been unreliable, expensive, or completely unavailable.",
     href: "https://www.starlink.com",
   },
 ];
@@ -98,17 +91,13 @@ export default function Ventures() {
               transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
               className="group flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4 focus-visible:ring-offset-background"
             >
-              {/* Logo container with branded background */}
-              <div className="aspect-[4/3] w-full overflow-hidden flex items-center justify-center p-8 bg-white">
-                  <img
-                    src={venture.logo}
-                    alt={venture.name}
-                    className="max-w-[70%] max-h-[80px] object-contain"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                </div>
+              <div className="aspect-[4/3] w-full overflow-hidden flex items-center justify-center p-6 md:p-8 bg-white">
+                <img
+                  src={venture.logo}
+                  alt={venture.name}
+                  className="max-w-[60%] max-h-[60px] object-contain group-hover:scale-[1.03] transition-transform duration-700"
+                />
+              </div>
               <div className="pt-6">
                 <h3 className="text-xl md:text-2xl font-medium tracking-tight text-foreground">
                   {venture.name}
