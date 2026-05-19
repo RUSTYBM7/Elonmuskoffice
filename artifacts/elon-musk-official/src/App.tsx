@@ -19,7 +19,6 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/about" component={HisFullLife} />
       <Route path="/donate" component={Donate} />
-      <Route path="/donate" component={HisFullLife} />
       <Route path="/crypto-endowment" component={CryptoPay} />
       <Route component={NotFound} />
     </Switch>

@@ -27,6 +27,8 @@ const userPhotos = [
   { filename: "IMG_0606 2.JPG", caption: "Elon Musk — Conference Stage", category: "public" },
   { filename: "IMG_1425.JPG", caption: "Elon Musk — Official Portrait", category: "portrait" },
   { filename: "IMG_1426.JPG", caption: "Elon Musk — Press Photo", category: "public" },
+  { filename: "IMG_9845.JPG", caption: "Elon Musk — High Resolution", category: "portrait" },
+  { filename: "IMG_9848.JPG", caption: "Elon Musk — Official Portrait", category: "portrait" },
 ];
 
 const wikimediaPhotos = [
