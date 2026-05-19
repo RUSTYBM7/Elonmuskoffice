@@ -10,7 +10,7 @@ import Newsletter from "@/components/Newsletter";
 import PressTicker from "@/components/PressTicker";
 import Footer from "@/components/Footer";
 
-export default function Contact() {
+export default function Management() {
   return (
     <div className="relative min-h-[100dvh] w-full bg-background text-foreground">
       <Header />

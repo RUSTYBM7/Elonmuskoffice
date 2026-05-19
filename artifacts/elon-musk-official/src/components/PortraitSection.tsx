@@ -5,10 +5,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import portrait from "@assets/IMG_9847_1777265766177.jpeg";
 
 const socialLinks = [
-  { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/message/673TLPEML5VVP1" },
-  { icon: FaXTwitter, label: "𝕏", href: "https://x.com/elonmusk" },
-  { icon: Mail, label: "Email", href: "mailto:info@elonmuskoffice.space" },
-  { icon: FaTelegram, label: "Telegram", href: "https://t.me/realelonrmusk7" },
+  { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/+18032587511" },
+  { icon: FaXTwitter, label: "X", href: "https://x.com/elonmusk" },
+  { icon: Mail, label: "Email", href: "mailto:Muskfoundation@currently.com" },
+  { icon: FaTelegram, label: "Telegram", href: "https://t.me/Elonmuskx00x1" },
 ];
 
 export default function PortraitSection() {
