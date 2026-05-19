@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Bot, Sparkles } from "lucide-react";
+import { X, Send } from "lucide-react";
+import GrokLogo from "./GrokLogo";
 
 const grokMessages = [
   { role: "grok", text: "I'm Grok, a AI assistant from xAI. How can I help you today?" },
@@ -31,16 +32,14 @@ export default function GrokWidget() {
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-foreground text-background flex items-center justify-center shadow-lg hover:scale-105 transition-transform"
         aria-label="Open Grok AI"
       >
-        {open ? <X className="w-5 h-5" /> : <Bot className="w-6 h-6" />}
+        {open ? <X className="w-5 h-5" /> : <GrokLogo size={28} />}
       </button>
 
       {open && (
         <div className="fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-32px)] bg-background border border-border shadow-2xl flex flex-col" style={{ height: 520 }}>
           <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-foreground">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-background/20 flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
-              </div>
+              <GrokLogo size={32} className="text-white" />
               <div>
                 <p className="text-sm font-semibold text-white">Grok</p>
                 <p className="text-[10px] text-white/60">xAI Assistant</p>
@@ -56,7 +55,7 @@ export default function GrokWidget() {
               <div key={i} className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
                 {msg.role === "grok" && (
                   <div className="w-7 h-7 rounded-full bg-foreground/10 flex items-center justify-center flex-shrink-0 mt-1">
-                    <Sparkles className="w-3.5 h-3.5 text-foreground" />
+                    <GrokLogo size={18} />
                   </div>
                 )}
                 <div className={`max-w-[75%] px-4 py-3 text-sm leading-relaxed ${msg.role === "grok" ? "bg-muted border border-border" : "bg-foreground text-background"}`}>
