@@ -28,10 +28,10 @@ export default function Header() {
 
           {/* His Full Life button */}
           <a
-            href={`${import.meta.env.BASE_URL}his-full-life`}
+            href={`${import.meta.env.BASE_URL}about`}
             className="inline-flex items-center justify-center h-9 md:h-10 px-4 md:px-5 text-xs uppercase tracking-[0.14em] font-medium border border-border text-foreground hover:bg-muted transition-colors"
           >
-            His Full Life
+            About Elon
           </a>
 
           {/* Contact button */}
