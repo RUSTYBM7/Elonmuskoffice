@@ -1,28 +1,26 @@
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import PortraitSection from "@/components/PortraitSection";
-import Bio from "@/components/Bio";
-import Forbes from "@/components/Forbes";
-import Timeline from "@/components/Timeline";
-import Ventures from "@/components/Ventures";
-import Vision from "@/components/Vision";
+import ContactHero from "@/components/ContactHero";
+import MissionVision from "@/components/MissionVision";
+import Foundation from "@/components/Foundation";
+import NeuralinkSection from "@/components/NeuralinkSection";
+import AISection from "@/components/AISection";
+import DirectorSection from "@/components/DirectorSection";
+import CompaniesGrid from "@/components/CompaniesGrid";
 import Newsletter from "@/components/Newsletter";
-import PressTicker from "@/components/PressTicker";
 import Footer from "@/components/Footer";
 
 export default function Contact() {
   return (
-    <div className="relative min-h-[100dvh] w-full bg-background text-foreground">
+    <div className="min-h-[100dvh] w-full bg-background text-foreground">
       <Header />
-      <Hero />
-      <PortraitSection />
-      <Bio />
-      <Forbes />
-      <Timeline />
-      <Ventures />
-      <Vision />
+      <ContactHero />
+      <MissionVision />
+      <Foundation />
+      <NeuralinkSection />
+      <AISection />
+      <DirectorSection />
+      <CompaniesGrid />
       <Newsletter />
-      <PressTicker />
       <Footer />
     </div>
   );

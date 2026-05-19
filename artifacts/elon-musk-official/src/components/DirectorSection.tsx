@@ -10,8 +10,8 @@ export default function DirectorSection() {
         </div>
         <div className="max-w-3xl mx-auto bg-background border border-border p-8 md:p-12">
           <div className="flex flex-col md:flex-row gap-8 items-start">
-            <div className="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 overflow-hidden bg-muted">
-              <img src="/attached_assets/IMG_9847_1777265766177.jpeg" alt="Jared Birchall" className="w-full h-full object-cover" />
+            <div className="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 overflow-hidden bg-muted rounded-full">
+              <img src="/attached_assets/jared-birchall.jpg" alt="Jared Birchall" className="w-full h-full object-cover" />
             </div>
             <div>
               <h3 className="text-xl md:text-2xl font-medium text-foreground">Jared Birchall</h3>

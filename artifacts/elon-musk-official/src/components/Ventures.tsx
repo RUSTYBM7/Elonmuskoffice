@@ -1,67 +1,61 @@
 import { motion } from "framer-motion";
-import spacexRocket from "@/assets/spacex-rocket.png";
-import teslaCar from "@/assets/tesla-car.png";
-import neuralink from "@/assets/neuralink.png";
-import boringCompany from "@/assets/boring-company.png";
-import xai from "@/assets/xai.png";
-import xCom from "@/assets/x-com.png";
-import starlink from "@/assets/starlink.png";
 
+// Official brand SVG logos from Wikimedia Commons / official sources
 const ventures = [
   {
     name: "Tesla",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg",
     role: "Technoking & CEO",
     description:
       "Accelerating the world's transition to sustainable energy with electric vehicles, solar generation and integrated energy storage.",
-    image: teslaCar,
     href: "https://www.tesla.com",
   },
   {
     name: "SpaceX",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/22/SpaceX_logo_2010.svg",
     role: "Founder, CEO & Chief Engineer",
     description:
       "Designing, manufacturing and launching advanced rockets and spacecraft. The ultimate goal: enabling humanity to live on other planets.",
-    image: spacexRocket,
     href: "https://www.spacex.com",
   },
   {
     name: "Neuralink",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Neuralink_Logo.svg",
     role: "Co-founder",
     description:
       "Developing ultra-high bandwidth brain-machine interfaces to connect humans and computers.",
-    image: neuralink,
     href: "https://neuralink.com",
   },
   {
     name: "The Boring Company",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Boring_Company_Logo.svg",
     role: "Founder",
     description:
       "Solving traffic, transforming cities and enabling rapid point-to-point transportation through next-generation tunnels.",
-    image: boringCompany,
     href: "https://www.boringcompany.com",
   },
   {
     name: "xAI",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Xai_logo.svg",
     role: "Founder",
     description:
       "Building artificial intelligence to accelerate human scientific discovery and understand the true nature of the universe.",
-    image: xai,
     href: "https://x.ai",
   },
   {
     name: "𝕏",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023.svg",
     role: "Executive Chairman & CTO",
     description:
       "The everything app — a global digital town square for conversation, news, finance and creators.",
-    image: xCom,
     href: "https://x.com",
   },
   {
     name: "Starlink",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Star_Link_Logo.svg",
     role: "SpaceX Constellation",
     description:
       "Delivering high-speed broadband internet to locations where access has been unreliable, expensive, or completely unavailable.",
-    image: starlink,
     href: "https://www.starlink.com",
   },
 ];
@@ -98,11 +92,17 @@ export default function Ventures() {
               transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
               className="group flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4 focus-visible:ring-offset-background"
             >
-              <div className="aspect-[4/3] w-full overflow-hidden bg-muted">
+              {/* Logo container with branded background */}
+              <div
+                className="aspect-[4/3] w-full overflow-hidden flex items-center justify-center p-8 bg-white"
+              >
                 <img
-                  src={venture.image}
+                  src={venture.logo}
                   alt={venture.name}
-                  className="w-full h-full object-cover transform group-hover:scale-[1.03] transition-transform duration-700"
+                  className="max-w-[70%] max-h-[80px] object-contain group-hover:scale-[1.03] transition-transform duration-700"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = "none";
+                  }}
                 />
               </div>
               <div className="pt-6">

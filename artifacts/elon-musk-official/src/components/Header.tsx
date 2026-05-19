@@ -31,7 +31,7 @@ export default function Header() {
             href={`${import.meta.env.BASE_URL}management`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center h-9 md:h-10 px-5 md:px-6 text-xs uppercase tracking-[0.14em] font-medium bg-foreground text-background hover:bg-foreground/90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="inline-flex items-center justify-center h-9 md:h-10 px-4 md:px-5 text-xs uppercase tracking-[0.14em] font-medium border border-border text-foreground hover:bg-muted transition-colors"
           >
             Management
           </a>
