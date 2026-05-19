@@ -5,10 +5,9 @@ import Bio from "@/components/Bio";
 import Forbes from "@/components/Forbes";
 import Timeline from "@/components/Timeline";
 import Ventures from "@/components/Ventures";
-import Vision from "@/components/Vision";
+import LifeGallery from "@/components/LifeGallery";
 import Newsletter from "@/components/Newsletter";
 import PressTicker from "@/components/PressTicker";
-import GrokWidget from "@/components/GrokWidget";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -21,10 +20,9 @@ export default function Home() {
       <Forbes />
       <Timeline />
       <Ventures />
-      <Vision />
+      <LifeGallery />
       <Newsletter />
       <PressTicker />
-      <GrokWidget />
       <Footer />
     </div>
   );
