@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { useTheme } from "@/hooks/use-theme";
+import { Sun, Moon } from "lucide-react";
 
 export default function Header() {
   const { theme, toggle } = useTheme();
@@ -21,9 +22,9 @@ export default function Header() {
             type="button"
             onClick={toggle}
             aria-label="Toggle color theme"
-            className="w-9 h-9 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground rounded-sm text-lg leading-none [filter:grayscale(1)]"
+            className="w-9 h-9 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground rounded-sm"
           >
-            <span aria-hidden="true">{theme === "dark" ? "☀️" : "🌙"}</span>
+            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
 
           {/* His Full Life button */}
@@ -31,15 +32,15 @@ export default function Header() {
             href={`${import.meta.env.BASE_URL}about`}
             className="inline-flex items-center justify-center h-9 md:h-10 px-4 md:px-5 text-xs uppercase tracking-[0.14em] font-medium border border-border text-foreground hover:bg-muted transition-colors"
           >
-            About Elon
+            Vision
           </a>
 
-          {/* Contact button */}
+          {/* Get In Touch button */}
           <a
             href={`${import.meta.env.BASE_URL}contact`}
             className="inline-flex items-center justify-center h-9 md:h-10 px-4 md:px-5 text-xs uppercase tracking-[0.14em] font-medium border border-border text-foreground hover:bg-muted transition-colors"
           >
-            Contact
+            Get In Touch
           </a>
         </div>
       </div>

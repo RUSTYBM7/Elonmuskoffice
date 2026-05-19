@@ -1,10 +1,16 @@
 import { motion } from "framer-motion";
+import teslaCar from "@/assets/tesla-car.png";
+import spacexRocket from "@/assets/spacex-rocket.png";
+import neuralinkLogo from "@/assets/neuralink.png";
+import boringLogo from "@/assets/boring-company.png";
+import xaiLogo from "@/assets/xai.png";
+import xLogo from "@/assets/x-com.png";
+import starlinkLogo from "@/assets/starlink.png";
 
-// Official brand SVG logos from Wikimedia Commons / official sources
 const ventures = [
   {
     name: "Tesla",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg",
+    logo: teslaCar,
     role: "Technoking & CEO",
     description:
       "Accelerating the world's transition to sustainable energy with electric vehicles, solar generation and integrated energy storage.",
@@ -12,7 +18,7 @@ const ventures = [
   },
   {
     name: "SpaceX",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/2/22/SpaceX_logo_2010.svg",
+    logo: spacexRocket,
     role: "Founder, CEO & Chief Engineer",
     description:
       "Designing, manufacturing and launching advanced rockets and spacecraft. The ultimate goal: enabling humanity to live on other planets.",
@@ -20,7 +26,7 @@ const ventures = [
   },
   {
     name: "Neuralink",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Neuralink_Logo.svg",
+    logo: neuralinkLogo,
     role: "Co-founder",
     description:
       "Developing ultra-high bandwidth brain-machine interfaces to connect humans and computers.",
@@ -28,7 +34,7 @@ const ventures = [
   },
   {
     name: "The Boring Company",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Boring_Company_Logo.svg",
+    logo: boringLogo,
     role: "Founder",
     description:
       "Solving traffic, transforming cities and enabling rapid point-to-point transportation through next-generation tunnels.",
@@ -36,15 +42,15 @@ const ventures = [
   },
   {
     name: "xAI",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Xai_logo.svg",
+    logo: xaiLogo,
     role: "Founder",
     description:
       "Building artificial intelligence to accelerate human scientific discovery and understand the true nature of the universe.",
     href: "https://x.ai",
   },
   {
-    name: "𝕏",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023.svg",
+    name: "𝕏 (Twitter/X)",
+    logo: xLogo,
     role: "Executive Chairman & CTO",
     description:
       "The everything app — a global digital town square for conversation, news, finance and creators.",
@@ -52,7 +58,7 @@ const ventures = [
   },
   {
     name: "Starlink",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Star_Link_Logo.svg",
+    logo: starlinkLogo,
     role: "SpaceX Constellation",
     description:
       "Delivering high-speed broadband internet to locations where access has been unreliable, expensive, or completely unavailable.",
@@ -93,18 +99,16 @@ export default function Ventures() {
               className="group flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4 focus-visible:ring-offset-background"
             >
               {/* Logo container with branded background */}
-              <div
-                className="aspect-[4/3] w-full overflow-hidden flex items-center justify-center p-8 bg-white"
-              >
-                <img
-                  src={venture.logo}
-                  alt={venture.name}
-                  className="max-w-[70%] max-h-[80px] object-contain group-hover:scale-[1.03] transition-transform duration-700"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = "none";
-                  }}
-                />
-              </div>
+              <div className="aspect-[4/3] w-full overflow-hidden flex items-center justify-center p-8 bg-white">
+                  <img
+                    src={venture.logo}
+                    alt={venture.name}
+                    className="max-w-[70%] max-h-[80px] object-contain"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                    }}
+                  />
+                </div>
               <div className="pt-6">
                 <h3 className="text-xl md:text-2xl font-medium tracking-tight text-foreground">
                   {venture.name}
