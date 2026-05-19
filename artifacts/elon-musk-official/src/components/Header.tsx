@@ -26,21 +26,17 @@ export default function Header() {
             <span aria-hidden="true">{theme === "dark" ? "☀️" : "🌙"}</span>
           </button>
 
-          {/* Management button */}
+          {/* His Full Life button */}
           <a
-            href={`${import.meta.env.BASE_URL}management`}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`${import.meta.env.BASE_URL}his-full-life`}
             className="inline-flex items-center justify-center h-9 md:h-10 px-4 md:px-5 text-xs uppercase tracking-[0.14em] font-medium border border-border text-foreground hover:bg-muted transition-colors"
           >
-            Management
+            His Full Life
           </a>
 
           {/* Contact button */}
           <a
             href={`${import.meta.env.BASE_URL}contact`}
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center justify-center h-9 md:h-10 px-4 md:px-5 text-xs uppercase tracking-[0.14em] font-medium border border-border text-foreground hover:bg-muted transition-colors"
           >
             Contact

@@ -34,8 +34,8 @@ export default function DirectorSection() {
                 security architecture, and large-scale infrastructure management.
               </p>
               <div className="mt-6 flex items-center gap-6">
-                <a href="mailto:j.birchall@elonmuskoffice.space" className="flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-colors">
-                  <Mail className="w-4 h-4" /> j.birchall@elonmuskoffice.space
+                <a href="mailto:jbirchall@elonmuskoffice.site" className="flex items-center gap-2 text-sm text-foreground/70 hover:text-foreground transition-colors">
+                  <Mail className="w-4 h-4" /> jbirchall@elonmuskoffice.site
                 </a>
               </div>
             </div>

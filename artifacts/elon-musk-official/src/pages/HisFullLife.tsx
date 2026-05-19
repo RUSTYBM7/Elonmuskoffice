@@ -1,31 +1,33 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import PortraitSection from "@/components/PortraitSection";
-import Bio from "@/components/Bio";
+import Biography from "@/components/Biography";
 import Forbes from "@/components/Forbes";
 import Timeline from "@/components/Timeline";
 import Ventures from "@/components/Ventures";
 import Vision from "@/components/Vision";
+import LifeGallery from "@/components/LifeGallery";
 import Newsletter from "@/components/Newsletter";
 import PressTicker from "@/components/PressTicker";
-import GrokWidget from "@/components/GrokWidget";
 import Footer from "@/components/Footer";
+import GrokWidget from "@/components/GrokWidget";
 
-export default function Home() {
+export default function HisFullLife() {
   return (
     <div className="relative min-h-[100dvh] w-full bg-background text-foreground">
       <Header />
       <Hero />
       <PortraitSection />
-      <Bio />
+      <Biography />
       <Forbes />
       <Timeline />
       <Ventures />
       <Vision />
+      <LifeGallery />
       <Newsletter />
       <PressTicker />
-      <GrokWidget />
       <Footer />
+      <GrokWidget />
     </div>
   );
 }

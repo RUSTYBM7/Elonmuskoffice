@@ -12,6 +12,7 @@ const ventures = [
 ];
 
 const explore = [
+  { name: "His Full Life", href: "/his-full-life" },
   { name: "Biography", href: "/#biography" },
   { name: "Forbes Profile", href: "https://www.forbes.com/profile/elon-musk/" },
   { name: "Career Timeline", href: "/#timeline" },

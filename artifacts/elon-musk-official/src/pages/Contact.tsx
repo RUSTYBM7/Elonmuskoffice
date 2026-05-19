@@ -7,6 +7,7 @@ import AISection from "@/components/AISection";
 import DirectorSection from "@/components/DirectorSection";
 import CompaniesGrid from "@/components/CompaniesGrid";
 import Newsletter from "@/components/Newsletter";
+import GrokWidget from "@/components/GrokWidget";
 import Footer from "@/components/Footer";
 
 export default function Contact() {
@@ -21,6 +22,7 @@ export default function Contact() {
       <DirectorSection />
       <CompaniesGrid />
       <Newsletter />
+      <GrokWidget />
       <Footer />
     </div>
   );
