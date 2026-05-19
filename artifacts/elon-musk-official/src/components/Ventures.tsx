@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import teslaLogo from "@/assets/tesla-brand-logo.svg";
-import spacexLogo from "@/assets/spacex-brand-logo.png";
+import teslaLogo from "@/assets/tesla-logo.svg";
+import spacexLogo from "@/assets/spacex-logo.png";
 import neuralinkLogo from "@/assets/neuralink-brand-logo.svg";
 import boringLogo from "@/assets/boring-company.png";
 import xaiLogo from "@/assets/xai.png";
-import xLogo from "@/assets/x-com.png";
+import xLogo from "@/assets/x-logo.svg";
 import starlinkLogo from "@/assets/starlink.png";
 
 const ventures = [
@@ -44,7 +44,7 @@ const ventures = [
     href: "https://x.ai",
   },
   {
-    name: "𝕏 (Twitter/X)",
+    name: "X (Twitter)",
     logo: xLogo,
     role: "Executive Chairman & CTO",
     description: "The everything app — a global digital town square for conversation, news, finance and creators.",
