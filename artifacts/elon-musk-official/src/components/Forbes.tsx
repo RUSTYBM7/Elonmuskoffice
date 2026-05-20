@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 
 const stats = [
   { label: "Forbes Real-Time Rank", value: "#1" },
-  { label: "Estimated Net Worth", value: "$300B–$800B" },
+  { label: "Estimated Net Worth", value: "$800B" },
   { label: "Source of Wealth", value: "Tesla, SpaceX, xAI" },
   { label: "Residence", value: "Austin, Texas" },
 ];

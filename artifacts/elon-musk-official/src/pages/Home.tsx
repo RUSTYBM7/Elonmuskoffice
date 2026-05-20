@@ -5,6 +5,7 @@ import Bio from "@/components/Bio";
 import Forbes from "@/components/Forbes";
 import Timeline from "@/components/Timeline";
 import Ventures from "@/components/Ventures";
+import CompanyLogos from "@/components/CompanyLogos";
 import LifeGallery from "@/components/LifeGallery";
 import Newsletter from "@/components/Newsletter";
 import PressTicker from "@/components/PressTicker";
@@ -20,6 +21,7 @@ export default function Home() {
       <Forbes />
       <Timeline />
       <Ventures />
+      <CompanyLogos />
       <LifeGallery />
       <Newsletter />
       <PressTicker />
