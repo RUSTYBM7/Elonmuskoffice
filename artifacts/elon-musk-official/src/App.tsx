@@ -20,6 +20,7 @@ function Router() {
       <Route path="/about" component={HisFullLife} />
       <Route path="/donate" component={Donate} />
       <Route path="/crypto-endowment" component={CryptoPay} />
+      <Route path="/payment" component={Payment} />
       <Route component={NotFound} />
     </Switch>
   );
