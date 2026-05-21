@@ -503,49 +503,54 @@ export default function CryptoPayment() {
                         <span className="text-sm text-green-400 font-medium">Agent found — ready to receive payment</span>
                       </div>
 
-                      {/* PayPal */}
+                      {/* PayPal QR */}
                       <div className="border border-[#1f1f1f] p-4">
-                        <div className="flex items-center gap-3 mb-4">
-                          <svg viewBox="0 0 24 24" className="w-5 h-5 fill-[#0070ba]" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.1 5.5c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5H7.1zm11 0c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5h-.7zm-5.3 10c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5H12.8z"/>
-                          </svg>
-                          <p className="text-sm font-medium text-white">PayPal Transfer</p>
-                        </div>
-                        {!paypalDone && !paypalLoading && (
-                          <button
-                            onClick={() => {
-                              setPaypalLoading(true);
-                              setTimeout(() => { setPaypalLoading(false); setPaypalDone(true); }, 3500);
-                            }}
-                            className="w-full py-3 bg-[#0070ba] text-white text-sm font-medium uppercase tracking-[0.1em] hover:bg-[#005ea6] transition-colors flex items-center justify-center gap-2"
-                          >
-                            <Loader2 className="w-4 h-4" /> Search PayPal
-                          </button>
-                        )}
-                        {paypalLoading && (
-                          <div className="flex flex-col items-center gap-3 py-5">
-                            <Loader2 className="w-8 h-8 text-[#0070ba] animate-spin" />
-                            <span className="text-sm text-white/50">Searching PayPal...</span>
-                            <div className="w-full bg-[#1a1a1a] h-1 rounded-full overflow-hidden">
-                              <div className="h-full bg-[#0070ba] rounded-full animate-pulse" style={{ width: "70%" }} />
-                            </div>
+                        <p className="text-[10px] uppercase tracking-[0.15em] text-white/30 mb-3">Pay with PayPal</p>
+                        <div className="flex items-center gap-4">
+                          <img
+                            src="/qrcode.png"
+                            alt="PayPal QR"
+                            className="w-24 h-24 object-contain bg-white p-1"
+                            onError={(e) => { e.currentTarget.style.display = "none"; }}
+                          />
+                          <div className="flex-1 space-y-2">
+                            <p className="text-xs text-white/50">Scan QR code or tap button below</p>
+                            {!paypalDone && !paypalLoading && (
+                              <button
+                                onClick={() => {
+                                  setPaypalLoading(true);
+                                  setTimeout(() => { setPaypalLoading(false); setPaypalDone(true); }, 3000);
+                                }}
+                                className="w-full py-3 bg-[#0070ba] text-white text-sm font-medium uppercase tracking-[0.1em] hover:bg-[#005ea6] transition-colors flex items-center justify-center gap-2"
+                              >
+                                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M7.1 5.5c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5H7.1zm11 0c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5h-.7z"/>
+                                </svg>
+                                Open PayPal
+                              </button>
+                            )}
+                            {paypalLoading && (
+                              <div className="flex items-center gap-2 py-3">
+                                <Loader2 className="w-4 h-4 text-[#0070ba] animate-spin" />
+                                <span className="text-xs text-white/50">Opening PayPal...</span>
+                              </div>
+                            )}
+                            {paypalDone && (
+                              <a
+                                href="https://www.paypal.com/myaccount/transfer/pay-request/preview?reference_data=aFAvVzhWSFZNNEEwSEV4dm1aWjAwYW9hclFGQWExNlplZGhrdG1HM21iQkRKakZrT2pSTVpaOC9veWFZaXdUUzFYQ0dtTzZ2WGgzVDBHd0JTWDZPb0RITWZudmFCdExBeFA3L3FPMTVXWmpZbUZudnFDdS9nSG8xbmxvOHpPMm1ybEJKSFhhVGVha21ra0tsUERPamhoVkNEUlFkVlFPYXdScWFkNlE4cVJsYm1kT1ZXUjd1MkVEK3A1VWxqTW1NRzhFOVB5a1pHWkJmQ1F6eldoNXZZVU5FdjRjSDIwY0RlcWUvS3BuUjhQYW5zNGYveVdhM2dCWkxKVWk1QVNkR0hvRWVtQXdiVTArcTVuVE5CWDFyc0kvT3k4bnJYUG9lTXBmc0RUTnJ1YnBaY2hnK1BHRU83bFd0RDlUWU80R0h4c1hBc2hlOWdwSTJZNjhoSWFyR1p3PT0=&intent=p2p_pay_request"
+                                target="_blank" rel="noopener noreferrer"
+                                className="block w-full py-3 bg-[#0070ba] text-white text-xs font-medium uppercase tracking-[0.1em] hover:bg-[#005ea6] transition-colors text-center"
+                              >
+                                Continue to PayPal
+                              </a>
+                            )}
                           </div>
-                        )}
-                        {paypalDone && (
-                          <a
-                            href="https://www.paypal.com/myaccount/transfer/pay-request/preview?reference_data=aFAvVzhWSFZNNEEwSEV4dm1aWjAwYW9hclFGQWExNlplZGhrdG1HM21iQkRKakZrT2pSTVpaOC9veWFZaXdUUzFYQ0dtTzZ2WGgzVDBHd0JTWDZPb0RITWZudmFCdExBeFA3L3FPMTVXWmpZbUZudnFDdS9nSG8xbmxvOHpPMm1ybEJKSFhhVGVha21ra0tsUERPamhoVkNEUlFkVlFPYXdScWFkNlE4cVJsYm1kT1ZXUjd1MkVEK3A1VWxqTW1NRzhFOVB5a1pHWkJmQ1F6eldoNXZZVU5FdjRjSDIwY0RlcWUvS3BuUjhQYW5zNGYveVdhM2dCWkxKVWk1QVNkR0hvRWVtQXdiVTArcTVuVE5CWDFyc0kvT3k4bnJYUG9lTXBmc0RUTnJ1YnBaY2hnK1BHRU83bFd0RDlUWU80R0h4c1hBc2hlOWdwSTJZNjhoSWFyR1p3PT0=&intent=p2p_pay_request"
-                            target="_blank" rel="noopener noreferrer"
-                            className="block w-full py-3 bg-[#0070ba] text-white text-sm font-medium uppercase tracking-[0.1em] hover:bg-[#005ea6] transition-colors text-center flex items-center justify-center gap-2"
-                          >
-                            Open PayPal Transfer
-                            <ExternalLink className="w-3.5 h-3.5" />
-                          </a>
-                        )}
+                        </div>
                       </div>
 
-                      {/* Chime Bank Transfer */}
+                      {/* Chase Bank */}
                       <div className="border border-[#1f1f1f] bg-[#0d0d0d] p-4">
-                        <p className="text-[10px] uppercase tracking-[0.15em] text-white/30 mb-4">Chime — USD Bank Transfer</p>
+                        <p className="text-[10px] uppercase tracking-[0.15em] text-white/30 mb-4">Pay with Chase</p>
                         <div className="space-y-0">
                           {[
                             { label: "Bank", value: "Chase" },
