@@ -6,7 +6,6 @@ import Forbes from "@/components/Forbes";
 import Timeline from "@/components/Timeline";
 import Ventures from "@/components/Ventures";
 import Vision from "@/components/Vision";
-import LifeGallery from "@/components/LifeGallery";
 import Newsletter from "@/components/Newsletter";
 import PressTicker from "@/components/PressTicker";
 import Footer from "@/components/Footer";
@@ -23,7 +22,6 @@ export default function HisFullLife() {
       <Timeline />
       <Ventures />
       <Vision />
-      <LifeGallery />
       <Newsletter />
       <PressTicker />
       <Footer />

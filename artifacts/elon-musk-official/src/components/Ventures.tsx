@@ -5,7 +5,6 @@ import neuralinkLogo from "@/assets/neuralink-brand-logo.svg";
 import boringLogo from "@/assets/boring-company.png";
 import xaiLogo from "@/assets/xai.png";
 import xLogo from "@/assets/x-logo.svg";
-import starlinkLogo from "@/assets/starlink.png";
 
 const ventures = [
   {
@@ -52,10 +51,11 @@ const ventures = [
   },
   {
     name: "Starlink",
-    logo: starlinkLogo,
+    logo: "/attached_assets/IMG_1425.JPG",
     role: "SpaceX Constellation",
     description: "Delivering high-speed broadband internet to locations where access has been unreliable, expensive, or completely unavailable.",
     href: "https://www.starlink.com",
+    isPhoto: true,
   },
 ];
 
@@ -92,12 +92,21 @@ export default function Ventures() {
               className="group flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4 focus-visible:ring-offset-background"
             >
               <div className="aspect-[4/3] w-full overflow-hidden flex items-center justify-center p-6 md:p-8 bg-white">
-                <img
-                  src={venture.logo}
-                  alt={venture.name}
-                  className="max-w-[60%] max-h-[60px] object-contain group-hover:scale-[1.03] transition-transform duration-700"
-                />
-              </div>
+                  {(venture as any).isPhoto ? (
+                    <img
+                      src={venture.logo}
+                      alt={venture.name}
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                    />
+                  ) : (
+                    <img
+                      src={venture.logo}
+                      alt={venture.name}
+                      className="max-w-[60%] max-h-[60px] object-contain group-hover:scale-[1.03] transition-transform duration-700"
+                    />
+                  )}
+                </div>
               <div className="pt-6">
                 <h3 className="text-xl md:text-2xl font-medium tracking-tight text-foreground">
                   {venture.name}
