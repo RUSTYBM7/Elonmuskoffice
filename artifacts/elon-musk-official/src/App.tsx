@@ -8,7 +8,6 @@ import Home from "@/pages/Home";
 import Contact from "@/pages/Contact";
 import HisFullLife from "@/pages/HisFullLife";
 import Donate from "@/pages/Donate";
-import CryptoPay from "@/pages/CryptoPay";
 
 const queryClient = new QueryClient();
 
@@ -19,8 +18,6 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/about" component={HisFullLife} />
       <Route path="/donate" component={Donate} />
-      <Route path="/crypto-endowment" component={CryptoPay} />
-      <Route path="/payment" component={Payment} />
       <Route component={NotFound} />
     </Switch>
   );

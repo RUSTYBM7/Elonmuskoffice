@@ -14,8 +14,6 @@ const ventures = [
 const explore = [
   { name: "About Elon", href: "/about" },
   { name: "Biography", href: "/#biography" },
-  { name: "Crypto Endowment", href: "/crypto-endowment" },
-  { name: "Forbes Profile", href: "https://www.forbes.com/profile/elon-musk/" },
   { name: "Career Timeline", href: "/#timeline" },
   { name: "In His Words", href: "/#vision" },
   { name: "Press & Headlines", href: "/#press" },
