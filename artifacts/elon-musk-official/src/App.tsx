@@ -10,6 +10,7 @@ import HisFullLife from "@/pages/HisFullLife";
 import Donate from "@/pages/Donate";
 import PrivateGate from "@/pages/PrivateGate";
 import CryptoPay from "@/pages/CryptoPay";
+import Admin from "@/pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/donate" component={Donate} />
       <Route path="/crypto-endowment" component={PrivateGate} />
       <Route path="/admin-crypto" component={CryptoPay} />
+      <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>
   );
