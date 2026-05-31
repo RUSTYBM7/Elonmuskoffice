@@ -3,10 +3,10 @@ import { useRef } from "react";
 import teslaLogo from "@/assets/tesla-logo.svg";
 import spacexLogo from "@/assets/spacex-logo.png";
 import neuralinkLogo from "@/assets/neuralink-brand-logo.svg";
-import boringLogo from "@/assets/boring-company.png";
-import xaiLogo from "@/assets/xai.png";
-import xLogo from "@/assets/x-logo.svg";
-import starlinkLogo from "@/assets/starlink.png";
+import boringLogo from "@/assets/boring-company-logo-new.png";
+import xaiLogo from "@/assets/xai-logo-new.png";
+import xLogo from "@/assets/x-logo-new.png";
+import starlinkLogo from "@/assets/starlink-logo-new.png";
 
 const companies = [
   { name: "Tesla", logo: teslaLogo, color: "#E31937" },

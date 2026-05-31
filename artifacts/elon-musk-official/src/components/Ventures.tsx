@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import teslaLogo from "@/assets/tesla-logo.svg";
 import spacexLogo from "@/assets/spacex-logo.png";
 import neuralinkLogo from "@/assets/neuralink-brand-logo.svg";
-import boringLogo from "@/assets/boring-company.png";
-import xaiLogo from "@/assets/xai.png";
-import xLogo from "@/assets/x-logo.svg";
+import boringLogo from "@/assets/boring-company-logo-new.png";
+import xaiLogo from "@/assets/xai-logo-new.png";
+import xLogo from "@/assets/x-logo-new.png";
+import starlinkLogo from "@/assets/starlink-logo-new.png";
 
 const ventures = [
   {
@@ -51,11 +52,11 @@ const ventures = [
   },
   {
     name: "Starlink",
-    logo: "/attached_assets/IMG_1425.JPG",
+    logo: starlinkLogo,
     role: "SpaceX Constellation",
     description: "Delivering high-speed broadband internet to locations where access has been unreliable, expensive, or completely unavailable.",
     href: "https://www.starlink.com",
-    isPhoto: true,
+    isStarlink: true,
   },
 ];
 
@@ -92,12 +93,12 @@ export default function Ventures() {
               className="group flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4 focus-visible:ring-offset-background"
             >
               <div className="aspect-[4/3] w-full overflow-hidden flex items-center justify-center p-6 md:p-8 bg-white">
-                  {(venture as any).isPhoto ? (
+                  {(venture as any).isStarlink ? (
                     <img
                       src={venture.logo}
                       alt={venture.name}
-                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                      className="max-w-[60%] max-h-[60px] object-contain group-hover:scale-[1.03] transition-transform duration-700"
+                      style={{ filter: "brightness(0) invert(1)" }}
                     />
                   ) : (
                     <img

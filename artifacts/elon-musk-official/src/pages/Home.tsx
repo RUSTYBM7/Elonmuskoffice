@@ -4,6 +4,7 @@ import PortraitSection from "@/components/PortraitSection";
 import Bio from "@/components/Bio";
 import Forbes from "@/components/Forbes";
 import Timeline from "@/components/Timeline";
+import VentureExplorer from "@/components/VentureExplorer";
 import Ventures from "@/components/Ventures";
 import CompanyLogos from "@/components/CompanyLogos";
 import Newsletter from "@/components/Newsletter";
@@ -19,6 +20,7 @@ export default function Home() {
       <Bio />
       <Forbes />
       <Timeline />
+      <VentureExplorer />
       <Ventures />
       <CompanyLogos />
       <Newsletter />

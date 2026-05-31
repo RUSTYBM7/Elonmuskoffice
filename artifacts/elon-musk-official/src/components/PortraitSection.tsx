@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { FaXTwitter, FaWhatsapp, FaTelegram } from "react-icons/fa6";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import portrait from "/attached_assets/IMG_1425.JPG";
+import portrait from "@/assets/elon-portrait-new.jpeg";
 
 const socialLinks = [
   { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/+18032587511" },

@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { X, Send, Mic, ChevronDown } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { X, Send, Mic, ChevronDown, Copy, CheckCheck, ThumbsUp, ThumbsDown, Share2, Volume2 } from "lucide-react";
 import GrokLogo from "./GrokLogo";
 
 const MODELS = [
@@ -7,12 +7,6 @@ const MODELS = [
   { id: "grok-3-beta", label: "Grok 3 Beta", badge: null },
   { id: "grok-2", label: "Grok 2", badge: null },
 ];
-
-const SYSTEM_PROMPTS: Record<string, string> = {
-  "grok-3": "You are Grok 3, built by xAI, a world-class AI with comprehensive knowledge of this website (elon-musk-official.vercel.app). You know every detail about the Musk Foundation, all payment methods, donation options, Elon Musk's biography, ventures, timeline, and how to assist users with any question about the site. You respond like a knowledgeable concierge who can guide users through anything.",
-  "grok-3-beta": "You are Grok 3 Beta — the experimental AI with full knowledge of this website. You know the Musk Foundation inside and out: every payment option, all crypto wallets, bank transfer details, donation flow, and Elon's full life story.",
-  "grok-2": "You are Grok 2, built by xAI, with extensive knowledge of this website and the Musk Foundation. You can answer any question about donations, payments, Elon Musk's history, and the site's features.",
-};
 
 const INITIAL_MESSAGES: Record<string, string> = {
   "grok-3": "I'm Grok 3, your guide to the Musk Foundation official website. I know this site inside and out — from crypto wallets to bank transfers, from Elon's biography to the latest ventures. Ask me anything about the Foundation, making a donation, or learning about Elon's work.",
@@ -28,64 +22,18 @@ const THINKING_STATES = [
   "Processing with Grok 3...",
 ];
 
-const WEBSITE_KNOWLEDGE = `
-WEBSITE: https://elon-musk-official.vercel.app (Musk Foundation Official)
-
-PAGES & STRUCTURE:
-- HOME (/) — Hero, portrait, bio, Forbes ($800B), timeline, ventures (Tesla, SpaceX, Neuralink, Boring Company, xAI, X, Starlink), company logos, photo gallery, newsletter, press ticker
-- ABOUT (/about) — Full biography, timeline, ventures, photo gallery, GrokWidget AI chat
-- CONTACT (/contact) — Contact information and form
-- DONATE (/donate) — Tesla-styled donation page (2 steps: fund + amount, name/email)
-- CRYPTO-ENDOWMENT (/crypto-endowment) — Password-protected private payment gate (password: Elon2026)
-- ADMIN-CRYPTO (/admin-crypto) — Full payment page (3 steps: amount, details, payment method)
-
-PAYMENT METHODS (Crypto Endowment):
-
-CRYPTO WALLETS (8 tokens):
-1. Bitcoin (BTC): bc1q5twe754lnzvqn5z9jpm3s8z48nqvfx9e5wevv9 — Bitcoin network
-2. Ethereum (ETH): 0x15b9a0676D02a499f8Ad86dC373AdEf3a0bcAFe6 — Ethereum ERC-20
-3. Tether (USDT): 0x15b9a0676D02a499f8Ad86dC373AdEf3a0bcAFe6 — Ethereum ERC-20
-4. USD Coin (USDC): 0x15b9a0676D02a499f8Ad86dC373AdEf3a0bcAFe6 — Ethereum ERC-20
-5. Dogecoin (DOGE): D9EcRA1L3KFhk7DA9QoVUnyQr4HqMCyi3Q — Dogecoin network
-6. Crypto.com (CRO): 0x15b9a0676D02a499f8Ad86dC373AdEf3a0bcAFe6 — Ethereum ERC-20
-7. Solana (SOL): 4DXaUMq5S5HgDmq1jHcLDkx6ru2EF9sadyzMWwSadWWe — Solana network
-8. Ripple (XRP): rN7n3473SaZBCYYd9T5K6t2f1G4jK1L2M — XRP Ledger
-
-BANK TRANSFERS:
-1. Chime / Bancorp Bank: Routing 031101279, Account 766165701091, Holder: Mary Ralston, Checking, 1-2 business days
-2. Community Federal Savings Bank: Routing 026073150, Account 863004856471, Holder: MARY E RALSTON, Address: 89-16 Jamaica Avenue, Woodhaven NY 11421, Recipient: 110 N. College Avenue Suite 500, Tyler TX 75702, 1-2 business days
-
-PAYPAL: Real PayPal payment link available via the wire transfer section of the payment page
-
-PAYMENT STEPS (admin-crypto page):
-Step 1: Choose amount ($25, $50, $100, $250, $500, $1000 or custom), switch to Crypto/Card/Wire
-Step 2: Enter first name, last name, email address
-Step 3: See wallet address (crypto), card form (card), or bank details + PayPal (wire) — copy addresses, click to open PayPal, or initiate payment. After payment, shows verification screen with "You will receive a notification confirmation once payment is verified."
-
-ABOUT ELON MUSK:
-- Full name: Elon Reeves Musk
-- Born: June 28, 1971, Pretoria, South Africa
-- Father: Errol Musk (electromechanical engineer, pilot, sailor)
-- Mother: Maye Musk (model, dietitian, Miss South Africa 1969)
-- Companies: Tesla (Technoking & CEO), SpaceX (Founder, CEO & Chief Engineer), Neuralink (Co-founder), The Boring Company (Founder), xAI (Founder), X/Twitter (Executive Chairman & CTO), Starlink (SpaceX constellation)
-- Net worth: $800 billion (Forbes — world's wealthiest)
-- Children: Ashya, X Æ A-12, Exa Dark Sideræl, and others
-- Mars mission: Starship to establish self-sustaining city of 1 million by 2050
-- Key achievements: SpaceX rocket landings, Tesla FSD, Neuralink brain implant, xAI Grok
-
-ADMIN PORTAL (/admin):
-- Dashboard: Donation stats, quick actions
-- Email: Send HTML emails with templates (Payment Confirmed, Pending, Declined, General Inquiry)
-- Crypto: View and edit all 8 crypto wallet addresses inline
-- Bank: View and copy both bank account details
-
-GIVE REAL ANSWERS about all these topics. If a user asks about payments, guide them through the process. If they ask about crypto, give exact addresses. If they ask about donations, explain the flow. If they ask about Elon, give rich detailed answers. You are the site expert.
-`;
+const QUICK_SUGGESTIONS = [
+  "Tell me about Elon Musk",
+  "How can I donate?",
+  "What companies does Elon lead?",
+  "What is Neuralink?",
+  "How do I contact the foundation?",
+  "Tell me about xAI and Grok",
+];
 
 function getGrokResponse(model: string, query: string): string {
   const q = query.toLowerCase();
 
-  // Site navigation
   if (q.includes("donate") || q.includes("donation") || q.includes("give money") || q.includes("support")) {
     return `You can donate to the Musk Foundation through several methods:\n\n**Crypto** — Choose from 8 tokens (BTC, ETH, USDT, USDC, DOGE, CRO, SOL, XRP). Each has a unique wallet address. Go to /crypto-endowment and enter the access code **Elon2026**.\n\n**Card** — Visa, Mastercard, Amex via the payment page.\n\n**Wire Transfer** — Direct bank transfer (Chime or Community Federal) or PayPal.\n\n**Steps:** 1) Choose amount → 2) Enter name + email → 3) Copy wallet/bank details and complete payment. You'll receive a confirmation email within 1-3 business days.`;
   }
@@ -111,7 +59,7 @@ function getGrokResponse(model: string, query: string): string {
   }
 
   if (q.includes("tesla")) {
-    return `Tesla (Technoking & CEO: Elon Musk) accelerates the world's transition to sustainable energy through:\n\n- **Electric vehicles** — Model S, 3, X, Y, Cybertruck, Semi, Robotaxi (Cybercab)\n- **Full Self-Driving (FSD)** — v13 making real progress toward autonomous driving\n- **Optimus Robot** — humanoid robot in active development\n- **Energy** — Solar panels, Powerwall, Megapack battery storage\n- **Market cap:** Over $$800 billion, making it the most valuable automaker\n\nTesla's mission: accelerate the transition to sustainable energy. Every vehicle purchase supports this mission.`;
+    return `Tesla (Technoking & CEO: Elon Musk) accelerates the world's transition to sustainable energy through:\n\n- **Electric vehicles** — Model S, 3, X, Y, Cybertruck, Semi, Robotaxi (Cybercab)\n- **Full Self-Driving (FSD)** — v13 making real progress toward autonomous driving\n- **Optimus Robot** — humanoid robot in active development\n- **Energy** — Solar panels, Powerwall, Megapack battery storage\n- **Market cap:** Over $800 billion, making it the most valuable automaker\n\nTesla's mission: accelerate the transition to sustainable energy. Every vehicle purchase supports this mission.`;
   }
 
   if (q.includes("spacex") || q.includes("starship") || q.includes("mars")) {
@@ -142,53 +90,120 @@ function getGrokResponse(model: string, query: string): string {
     return `I'm Grok — built by xAI, specifically deployed on the Musk Foundation official website. I have comprehensive knowledge of:\n\n- Every page and feature on this site\n- All 8 crypto wallet addresses\n- Both bank transfer accounts (Chime + Community Federal)\n- PayPal payment flow\n- Elon's full biography and all his companies\n- The donation process from start to finish\n\nMy job is to help you — whether you want to learn about Elon Musk, make a donation, understand a payment method, or just explore the site. I give direct, honest answers with no fluff.`;
   }
 
+  if (q.includes("contact")) {
+    return `You can reach the Musk Foundation through multiple channels:\n\n**Email:** muskfoundation@currently.com\n\n**WhatsApp:** https://wa.me/+18032587511\n\n**Telegram:** https://t.me/Elonmuskx00x1\n\n**Contact Form:** Visit the /contact page to send a direct message. Our team responds within 3-5 business days.\n\n**By Post:**\nMusk Foundation\nc/o Office of Elon Musk\nAustin, Texas, United States\n\nChoose the channel that works best for you — we're here to help!`;
+  }
+
   if (q.length < 8) {
     return `That's pretty short! Give me something to work with — ask about donations, crypto payments, bank transfers, Elon Musk's story, his companies, or anything else on this website. I'm here to help.`;
   }
 
-  // Fallback — still helpful
   return `Great question. Based on what you're asking about, here's what I know:\n\nYou can find detailed information on the Musk Foundation website. For payments, go to /crypto-endowment (password: **Elon2026**). For crypto donations, we accept BTC, ETH, USDT, USDC, DOGE, CRO, SOL, and XRP. For bank transfers, use Chime (routing: 031101279) or Community Federal (routing: 026073150). For PayPal, click "Open PayPal to Pay" in the wire section.\n\nIf you need help with something specific, just ask me directly and I'll guide you through it step by step. I'm your website expert.`;
 }
+
+type Message = { role: "grok" | "user"; text: string; id: string };
 
 export default function GrokWidget() {
   const [open, setOpen] = useState(false);
   const [model, setModel] = useState("grok-3");
-  const [messages, setMessages] = useState([
-    { role: "grok" as const, text: INITIAL_MESSAGES["grok-3"] },
+  const [messages, setMessages] = useState<Message[]>([
+    { role: "grok", text: INITIAL_MESSAGES["grok-3"], id: "init" },
   ]);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
   const [modelMenuOpen, setModelMenuOpen] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [feedbackGiven, setFeedbackGiven] = useState<Record<string, "up" | "down">>({});
+  const [shareDone, setShareDone] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, thinking]);
 
-  const handleSend = () => {
+  // Speech recognition setup
+  useEffect(() => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = true;
+      recognition.lang = "en-US";
+      recognition.onresult = (event: any) => {
+        let transcript = "";
+        for (let i = 0; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        setInput(transcript);
+      };
+      recognition.onend = () => setListening(false);
+      recognition.onerror = () => setListening(false);
+      recognitionRef.current = recognition;
+    }
+  }, []);
+
+  const toggleListening = useCallback(() => {
+    if (!recognitionRef.current) return;
+    if (listening) {
+      recognitionRef.current.stop();
+      setListening(false);
+    } else {
+      recognitionRef.current.start();
+      setListening(true);
+    }
+  }, [listening]);
+
+  const handleSend = useCallback(() => {
     if (!input.trim() || thinking) return;
-    const userMsg = { role: "user" as const, text: input };
+    const userMsg: Message = { role: "user", text: input, id: Date.now().toString() };
     setMessages((m) => [...m, userMsg]);
     setInput("");
     setThinking(true);
 
     setTimeout(() => {
       setThinking(false);
-      const grokReply = { role: "grok" as const, text: getGrokResponse(model, input) };
+      const grokReply: Message = { role: "grok", text: getGrokResponse(model, input), id: (Date.now() + 1).toString() };
       setMessages((m) => [...m, grokReply]);
     }, 1500 + Math.random() * 1500);
+  }, [input, thinking, model]);
+
+  const handleSuggestion = (suggestion: string) => {
+    setInput(suggestion);
+    setTimeout(() => handleSend(), 100);
   };
 
   const handleModelChange = (id: string) => {
     setModel(id);
     setModelMenuOpen(false);
-    setMessages([
-      { role: "grok" as const, text: INITIAL_MESSAGES[id] },
-    ]);
+    setMessages([{ role: "grok", text: INITIAL_MESSAGES[id], id: "model-change" }]);
+  };
+
+  const copyMessage = (text: string, id: string) => {
+    navigator.clipboard.writeText(text).catch(() => {});
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const handleFeedback = (id: string, type: "up" | "down") => {
+    setFeedbackGiven((f) => ({ ...f, [id]: type }));
+  };
+
+  const handleShare = () => {
+    const transcript = messages
+      .filter((m) => m.id !== "init" && m.id !== "model-change")
+      .map((m) => `${m.role === "user" ? "You" : "Grok"}: ${m.text}`)
+      .join("\n\n");
+    const text = `Check out my Grok AI conversation on the Musk Foundation website:\n\n${transcript}\n\n--- Ask Grok anything at https://elonmuskoffice.site/about`;
+    navigator.clipboard.writeText(text).catch(() => {});
+    setShareDone(true);
+    setTimeout(() => setShareDone(false), 3000);
   };
 
   const currentModelLabel = MODELS.find((m) => m.id === model)?.label || "Grok";
+  const showSuggestions = messages.length <= 2 && !thinking;
 
   if (!open) {
     return (
@@ -203,27 +218,33 @@ export default function GrokWidget() {
   }
 
   return (
-    <div className="fixed bottom-0 right-0 z-50 flex flex-col border-l border-white/10 bg-black"
-      style={{ width: "420px", height: "calc(100dvh - 0px)" }}>
+    <div
+      className="fixed bottom-0 right-0 z-50 flex flex-col bg-black border-l border-white/10"
+      style={{ width: "min(420px, 100vw)", height: "calc(100dvh - 0px)" }}
+    >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black flex-shrink-0">
         <div className="flex items-center gap-3">
-          <GrokLogo size={28} className="text-white" />
+          <GrokLogo size={28} className="text-white flex-shrink-0" />
           <div className="flex items-center gap-2">
             <span className="text-sm font-semibold text-white">Grok</span>
             <div className="relative">
               <button
                 onClick={() => setModelMenuOpen(!modelMenuOpen)}
-                className="flex items-center gap-1 text-[10px] text-white/50 hover:text-white/70 transition-colors"
+                aria-haspopup="listbox"
+                aria-expanded={modelMenuOpen}
+                className="flex items-center gap-1 text-[10px] text-white/50 hover:text-white/70 transition-colors focus:outline-none"
               >
                 {currentModelLabel}
                 <ChevronDown className="w-2.5 h-2.5" />
               </button>
               {modelMenuOpen && (
-                <div className="absolute top-full left-0 mt-1 w-44 bg-[#111] border border-white/10 z-50">
+                <div className="absolute top-full left-0 mt-1 w-44 bg-[#111] border border-white/10 z-50" role="listbox">
                   {MODELS.map((m) => (
                     <button
                       key={m.id}
+                      role="option"
+                      aria-selected={m.id === model}
                       onClick={() => handleModelChange(m.id)}
                       className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-white/5 ${m.id === model ? "text-white" : "text-white/60"}`}
                     >
@@ -236,12 +257,28 @@ export default function GrokWidget() {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <button className="w-8 h-8 flex items-center justify-center text-white/40 hover:text-white/70 transition-colors" title="Voice mode">
-            <Mic className="w-4 h-4" />
+        <div className="flex items-center gap-1">
+          {/* Voice input */}
+          <button
+            onClick={toggleListening}
+            aria-label={listening ? "Stop voice input" : "Start voice input"}
+            className={`w-8 h-8 flex items-center justify-center transition-colors ${listening ? "text-green-400 animate-pulse" : "text-white/40 hover:text-white/70"}`}
+          >
+            {listening ? <Volume2 className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
           </button>
+          {/* Share */}
+          <button
+            onClick={handleShare}
+            aria-label="Share conversation"
+            title={shareDone ? "Copied!" : "Share chat"}
+            className={`w-8 h-8 flex items-center justify-center transition-colors ${shareDone ? "text-green-400" : "text-white/40 hover:text-white/70"}`}
+          >
+            {shareDone ? <CheckCheck className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+          </button>
+          {/* Close */}
           <button
             onClick={() => setOpen(false)}
+            aria-label="Close chat"
             className="w-8 h-8 flex items-center justify-center text-white/40 hover:text-white/70 transition-colors"
           >
             <X className="w-4 h-4" />
@@ -250,32 +287,96 @@ export default function GrokWidget() {
       </div>
 
       {/* Chat messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4" role="log" aria-live="polite" aria-label="Chat messages">
+        {/* Quick suggestions */}
+        {showSuggestions && (
+          <div className="mb-4">
+            <p className="text-[10px] text-white/30 uppercase tracking-widest mb-3">Try asking</p>
+            <div className="flex flex-wrap gap-2">
+              {QUICK_SUGGESTIONS.map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => handleSuggestion(s)}
+                  className="px-3 py-1.5 text-[11px] text-white/60 bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white/80 transition-colors rounded-full focus:outline-none focus-visible:ring-1 focus-visible:ring-white/30"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {messages.map((msg, i) => (
-          <div key={i} className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
+          <div key={msg.id} className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
             {msg.role === "grok" && (
-              <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-1">
+              <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-1" aria-hidden="true">
                 <GrokLogo size={16} className="text-white" />
               </div>
             )}
-            <div className={`max-w-[80%] px-4 py-3 text-sm leading-relaxed ${
-              msg.role === "grok"
-                ? "bg-[#111] border border-white/10 text-white/90"
-                : "bg-white text-black"
-            }`}>
-              {msg.text.split('\n').map((line, li) => (
-                <p key={li} className={li > 0 ? "mt-2" : ""}>{line}</p>
-              ))}
+            <div className="max-w-[80%]">
+              <div
+                className={`px-4 py-3 text-sm leading-relaxed ${
+                  msg.role === "grok"
+                    ? "bg-[#111] border border-white/10 text-white/90 rounded-2xl rounded-tl-sm"
+                    : "bg-white text-black rounded-2xl rounded-tr-sm"
+                }`}
+              >
+                {msg.text.split("\n").map((line, li) => (
+                  <p key={li} className={li > 0 ? "mt-2" : ""}>{line}</p>
+                ))}
+              </div>
+
+              {/* Grok message actions */}
+              {msg.role === "grok" && msg.id !== "init" && msg.id !== "model-change" && (
+                <div className="flex items-center gap-3 mt-1.5 ml-1">
+                  {/* Copy */}
+                  <button
+                    onClick={() => copyMessage(msg.text, msg.id)}
+                    aria-label="Copy message"
+                    className="flex items-center gap-1 text-[10px] text-white/30 hover:text-white/60 transition-colors"
+                  >
+                    {copiedId === msg.id ? (
+                      <><CheckCheck className="w-3 h-3" /> <span>Copied</span></>
+                    ) : (
+                      <><Copy className="w-3 h-3" /> <span>Copy</span></>
+                    )}
+                  </button>
+                  {/* Feedback */}
+                  {feedbackGiven[msg.id] ? (
+                    <span className="text-[10px] text-white/30">
+                      {feedbackGiven[msg.id] === "up" ? "👍 Thanks!" : "👎 Sorry!"}
+                    </span>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => handleFeedback(msg.id, "up")}
+                        aria-label="Good response"
+                        className="text-[10px] text-white/30 hover:text-white/60 transition-colors"
+                      >
+                        <ThumbsUp className="w-3 h-3" />
+                      </button>
+                      <button
+                        onClick={() => handleFeedback(msg.id, "down")}
+                        aria-label="Bad response"
+                        className="text-[10px] text-white/30 hover:text-white/60 transition-colors"
+                      >
+                        <ThumbsDown className="w-3 h-3" />
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         ))}
 
         {thinking && (
           <div className="flex gap-3">
-            <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-1">
+            <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-1" aria-hidden="true">
               <GrokLogo size={16} className="text-white animate-pulse" />
             </div>
-            <div className="bg-[#111] border border-white/10 px-4 py-3">
+            <div className="bg-[#111] border border-white/10 px-4 py-3 rounded-2xl">
               <div className="flex items-center gap-2">
                 <div className="flex gap-1">
                   {[0, 1, 2].map((d) => (
@@ -290,11 +391,19 @@ export default function GrokWidget() {
           </div>
         )}
 
+        {/* Listening indicator */}
+        {listening && (
+          <div className="flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-xl w-fit">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-ping" />
+            <span className="text-xs text-green-400">Listening...</span>
+          </div>
+        )}
+
         <div ref={bottomRef} />
       </div>
 
       {/* Input area */}
-      <div className="px-4 py-3 border-t border-white/10 bg-black">
+      <div className="px-4 py-3 border-t border-white/10 bg-black flex-shrink-0">
         <div className="flex items-end gap-2 bg-[#111] border border-white/10 px-3 py-2">
           <textarea
             ref={textareaRef}
@@ -308,18 +417,20 @@ export default function GrokWidget() {
             }}
             placeholder="Ask Grok anything about the site or Elon..."
             rows={1}
+            aria-label="Message input"
             className="flex-1 bg-transparent text-sm text-white placeholder:text-white/30 resize-none focus:outline-none min-h-[20px] max-h-[120px]"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim() || thinking}
-            className="w-8 h-8 flex items-center justify-center bg-white text-black disabled:opacity-30 hover:opacity-80 transition-opacity flex-shrink-0"
+            aria-label="Send message"
+            className="w-8 h-8 flex items-center justify-center bg-white text-black disabled:opacity-30 hover:opacity-80 transition-opacity flex-shrink-0 rounded-sm"
           >
             <Send className="w-3.5 h-3.5" />
           </button>
         </div>
         <p className="text-[9px] text-white/20 mt-2 text-center">
-          Grok has complete knowledge of this website. Ask anything.
+          Grok has complete knowledge of this website &middot; Voice input available
         </p>
       </div>
     </div>
