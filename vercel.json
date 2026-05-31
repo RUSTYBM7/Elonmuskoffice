@@ -1,8 +1,8 @@
 {
-  "installCommand": "pnpm install --no-frozen-lockfile",
-  "buildCommand": "pnpm --filter @workspace/elon-musk-official run build",
-  "outputDirectory": "artifacts/elon-musk-official/dist",
   "framework": "vite",
+  "buildCommand": "cd artifacts/elon-musk-official && npx vite build",
+  "outputDirectory": "artifacts/elon-musk-official/dist",
+  "installCommand": "pnpm install --no-frozen-lockfile",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
