@@ -3,8 +3,6 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
-const isVercel = process.env.VERCEL === "1";
-
 export default defineConfig({
   base: "/",
   plugins: [
@@ -19,11 +17,8 @@ export default defineConfig({
     dedupe: ["react", "react-dom"],
   },
   build: {
-    // On Vercel build machine, output to /vercel/path0/dist (repo root)
-    // so Vercel can find the output directory correctly
-    outDir: isVercel
-      ? path.resolve("/vercel/path0/dist")
-      : path.resolve(import.meta.dirname, "dist"),
+    // Vercel clones to /vercel/path0/ — go 2 levels up to repo root = dist/
+    outDir: path.resolve(import.meta.dirname, "..", "dist"),
     emptyOutDir: true,
     assetsInlineLimit: 0,
   },
