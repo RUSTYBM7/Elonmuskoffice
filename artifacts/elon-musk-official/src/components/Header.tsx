@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useTheme } from "@/hooks/use-theme";
 import { Sun, Moon, Menu, X, ChevronRight } from "lucide-react";
+import SearchButton from "./SearchButton";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -66,7 +67,10 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-1 md:gap-3">
+          <div className="flex items-center gap-1 md:gap-2">
+            {/* Search button */}
+            <SearchButton />
+
             {/* Theme toggle */}
             <button
               type="button"
