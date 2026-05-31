@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
+// On Vercel: pnpm --filter runs from the package dir,
+// so import.meta.dirname = artifacts/elon-musk-official
 export default defineConfig({
   base: "/",
   plugins: [
@@ -17,8 +19,7 @@ export default defineConfig({
     dedupe: ["react", "react-dom"],
   },
   build: {
-    // Vercel clones to /vercel/path0/ — go 2 levels up to repo root = dist/
-    outDir: path.resolve(import.meta.dirname, "..", "dist"),
+    outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
     assetsInlineLimit: 0,
   },
@@ -26,10 +27,4 @@ export default defineConfig({
     port: Number(process.env.PORT) || 5173,
     host: "0.0.0.0",
     allowedHosts: true,
-  },
-  preview: {
-    port: Number(process.env.PORT) || 4173,
-    host: "0.0.0.0",
-    allowedHosts: true,
-  },
-});
+  }
