@@ -1,6 +1,6 @@
 {
   "framework": "vite",
-  "buildCommand": "cd artifacts/elon-musk-official && npx vite build",
+  "buildCommand": "pnpm --filter @workspace/elon-musk-official run build",
   "outputDirectory": "artifacts/elon-musk-official/dist",
   "installCommand": "pnpm install --no-frozen-lockfile",
   "rewrites": [
