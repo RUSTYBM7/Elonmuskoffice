@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4b896"/>
+      <stop offset="60%" stop-color="#c4a882"/>
+      <stop offset="100%" stop-color="#a8896a"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8e8e8"/>
+      <stop offset="100%" stop-color="#cccccc"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#2a1a1a" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="500" fill="url(#bg)"/>
+  <rect width="400" height="500" fill="url(#glow)"/>
+
+  <!-- Hair top -->
+  <path d="M100 140 Q90 100 140 85 Q180 75 200 78 Q240 80 275 90 Q310 100 305 140 Q300 120 275 110 Q240 100 200 102 Q160 100 125 110 Q100 118 100 140Z" fill="url(#hair)"/>
+
+  <!-- Hair sides -->
+  <path d="M100 140 Q95 200 110 260 Q100 200 105 140 Q100 120 100 140Z" fill="#111"/>
+  <path d="M300 140 Q305 200 290 260 Q310 200 295 140 Q300 120 300 140Z" fill="#111"/>
+
+  <!-- Head -->
+  <ellipse cx="200" cy="200" rx="105" ry="125" fill="url(#skin)"/>
+
+  <!-- Ears -->
+  <ellipse cx="95" cy="200" rx="18" ry="28" fill="#c4a882"/>
+  <ellipse cx="305" cy="200" rx="18" ry="28" fill="#c4a882"/>
+  <ellipse cx="95" cy="200" rx="10" ry="18" fill="#b49872"/>
+  <ellipse cx="305" cy="200" rx="10" ry="18" fill="#b49872"/>
+
+  <!-- Nose shadow -->
+  <path d="M185 200 Q200 265 215 200 Q205 240 200 248 Q195 240 185 200Z" fill="#b49872" opacity="0.5"/>
+
+  <!-- Left eyebrow -->
+  <path d="M145 165 Q170 155 190 162" stroke="#1a1a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Right eyebrow -->
+  <path d="M210 162 Q230 155 255 165" stroke="#1a1a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- Left eye -->
+  <ellipse cx="168" cy="180" rx="22" ry="12" fill="#f5f5f0"/>
+  <ellipse cx="170" cy="182" rx="12" ry="10" fill="#3d2b1a"/>
+  <ellipse cx="172" cy="180" rx="5" ry="4" fill="#111"/>
+  <ellipse cx="176" cy="178" rx="3" ry="2.5" fill="#fff" opacity="0.8"/>
+  <!-- Left eye shadow upper -->
+  <path d="M145 170 Q168 158 190 170" stroke="#b49872" stroke-width="2" fill="none" opacity="0.4"/>
+
+  <!-- Right eye -->
+  <ellipse cx="232" cy="180" rx="22" ry="12" fill="#f5f5f0"/>
+  <ellipse cx="230" cy="182" rx="12" ry="10" fill="#3d2b1a"/>
+  <ellipse cx="228" cy="180" rx="5" ry="4" fill="#111"/>
+  <ellipse cx="224" cy="178" rx="3" ry="2.5" fill="#fff" opacity="0.8"/>
+  <!-- Right eye shadow upper -->
+  <path d="M210 170 Q232 158 255 170" stroke="#b49872" stroke-width="2" fill="none" opacity="0.4"/>
+
+  <!-- Nose bridge -->
+  <path d="M195 185 L192 210 Q200 218 208 210 L205 185" stroke="#b49872" stroke-width="1" fill="none" opacity="0.5"/>
+
+  <!-- Mouth -->
+  <path d="M168 265 Q200 275 232 265" stroke="#a8896a" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Jaw / chin shadow -->
+  <path d="M140 300 Q200 350 260 300 Q230 340 200 348 Q170 340 140 300Z" fill="#b49872" opacity="0.25"/>
+
+  <!-- Hairline detail -->
+  <path d="M125 150 Q150 135 200 130 Q250 135 275 150 Q250 140 200 138 Q150 140 125 150Z" fill="#0d0d0d"/>
+
+  <!-- Side hair shading -->
+  <path d="M98 160 Q90 200 98 260 Q96 200 100 160Z" fill="#0d0d0d" opacity="0.6"/>
+  <path d="M302 160 Q310 200 302 260 Q304 200 300 160Z" fill="#0d0d0d" opacity="0.6"/>
+
+  <!-- Neck -->
+  <path d="M160 315 Q155 380 145 450 L255 450 Q245 380 240 315 Q200 325 160 315Z" fill="url(#skin)"/>
+
+  <!-- Shirt collar -->
+  <path d="M145 450 Q160 420 200 415 Q240 420 255 450 L245 470 L155 470 Z" fill="url(#shirt)"/>
+  <path d="M145 450 Q175 430 200 428 Q225 430 255 450" stroke="#bbb" stroke-width="1" fill="none"/>
+
+  <!-- Shirt body -->
+  <rect x="110" y="440" width="180" height="60" fill="url(#shirt)"/>
+
+  <!-- Tie hint / collar detail -->
+  <path d="M185 440 L200 480 L215 440" fill="#ddd"/>
+  <line x1="200" y1="415" x2="200" y2="480" stroke="#bbb" stroke-width="0.5"/>
+
+  <!-- Cheekbone shading left -->
+  <path d="M120 200 Q130 230 140 260 Q130 235 120 200Z" fill="#b49872" opacity="0.15"/>
+  <!-- Cheekbone shading right -->
+  <path d="M280 200 Q270 230 260 260 Q270 235 280 200Z" fill="#b49872" opacity="0.15"/>
+
+  <!-- Temple shadow left -->
+  <path d="M100 160 Q110 180 115 200 Q108 175 100 160Z" fill="#a8896a" opacity="0.2"/>
+  <!-- Temple shadow right -->
+  <path d="M300 160 Q290 180 285 200 Q292 175 300 160Z" fill="#a8896a" opacity="0.2"/>
+
+  <!-- Red accent — subtle diagonal line bottom right -->
+  <line x1="320" y1="470" x2="380" y2="410" stroke="#cc0000" stroke-width="1" opacity="0.3"/>
+  <line x1="325" y1="480" x2="390" y2="415" stroke="#cc0000" stroke-width="0.5" opacity="0.15"/>
+
+  <!-- Bottom watermark line -->
+  <line x1="100" y1="485" x2="300" y2="485" stroke="#333" stroke-width="0.5"/>
+</svg>

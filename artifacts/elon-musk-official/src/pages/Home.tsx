@@ -1,12 +1,17 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import PortraitSection from "@/components/PortraitSection";
+import StockWidget from "@/components/StockWidget";
 import Bio from "@/components/Bio";
+import PhotoGallery from "@/components/PhotoGallery";
 import Forbes from "@/components/Forbes";
 import Timeline from "@/components/Timeline";
+import VentureExplorer from "@/components/VentureExplorer";
 import Ventures from "@/components/Ventures";
-import Vision from "@/components/Vision";
+import CompanyLogos from "@/components/CompanyLogos";
+import PressWall from "@/components/PressWall";
 import Newsletter from "@/components/Newsletter";
+import IndependentNewsletter from "@/components/IndependentNewsletter";
 import PressTicker from "@/components/PressTicker";
 import Footer from "@/components/Footer";
 
@@ -16,12 +21,17 @@ export default function Home() {
       <Header />
       <Hero />
       <PortraitSection />
+      <StockWidget />
       <Bio />
+      <PhotoGallery />
       <Forbes />
       <Timeline />
+      <VentureExplorer />
       <Ventures />
-      <Vision />
+      <CompanyLogos />
+      <PressWall />
       <Newsletter />
+      <IndependentNewsletter />
       <PressTicker />
       <Footer />
     </div>

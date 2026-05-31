@@ -12,18 +12,18 @@ const ventures = [
 ];
 
 const explore = [
+  { name: "About Elon", href: "/about" },
   { name: "Biography", href: "/#biography" },
-  { name: "Forbes Profile", href: "https://www.forbes.com/profile/elon-musk/" },
   { name: "Career Timeline", href: "/#timeline" },
   { name: "In His Words", href: "/#vision" },
   { name: "Press & Headlines", href: "/#press" },
 ];
 
 const socials = [
-  { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/message/673TLPEML5VVP1" },
+  { icon: FaWhatsapp, label: "WhatsApp", href: "https://wa.me/+18032587511" },
   { icon: FaXTwitter, label: "𝕏", href: "https://x.com/elonmusk" },
-  { icon: Mail, label: "Email", href: "mailto:info@elonmuskoffice.space" },
-  { icon: FaTelegram, label: "Telegram", href: "https://t.me/realelonrmusk7" },
+  { icon: Mail, label: "Email", href: "mailto:Muskfoundation@currently.com" },
+  { icon: FaTelegram, label: "Telegram", href: "https://t.me/Elonmuskx00x1" },
 ];
 
 export default function Footer() {
@@ -111,15 +111,15 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-foreground/75">
               <li>
                 <a
-                  href="mailto:info@elonmuskoffice.space"
+                  href="mailto:Muskfoundation@currently.com"
                   className="hover:text-foreground dark:hover:text-primary transition-colors"
                 >
-                  info@elonmuskoffice.space
+                  Muskfoundation@currently.com
                 </a>
               </li>
               <li>
                 <a
-                  href="https://wa.me/message/673TLPEML5VVP1"
+                  href="https://wa.me/+18032587511"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-foreground dark:hover:text-primary transition-colors"
@@ -129,7 +129,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://t.me/realelonrmusk7"
+                  href="https://t.me/Elonmuskx00x1"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-foreground dark:hover:text-primary transition-colors"

@@ -6,6 +6,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Contact from "@/pages/Contact";
+import HisFullLife from "@/pages/HisFullLife";
+import Donate from "@/pages/Donate";
+import PrivateGate from "@/pages/PrivateGate";
+import CryptoPay from "@/pages/CryptoPay";
+import Admin from "@/pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -14,6 +19,11 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/contact" component={Contact} />
+      <Route path="/about" component={HisFullLife} />
+      <Route path="/donate" component={Donate} />
+      <Route path="/crypto-endowment" component={PrivateGate} />
+      <Route path="/admin-crypto" component={CryptoPay} />
+      <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>
   );
