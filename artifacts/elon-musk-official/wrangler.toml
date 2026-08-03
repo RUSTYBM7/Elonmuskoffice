@@ -1,0 +1,27 @@
+name = "elonmuskoffice-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare Workers configuration
+# This file is for the API/Worker backend if you need server-side functionality
+# For pure static hosting on Cloudflare Pages, the public folder is deployed directly
+
+# Pages Function configuration (for serverless functions on Cloudflare Pages)
+# Files in functions/ directory become serverless functions
+
+# D1 Database (if needed for future backend)
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "elonmuskoffice-db"
+# database_id = "your-database-id"
+
+# KV Namespace (for caching and storage)
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = "your-kv-namespace-id"
+
+# R2 Bucket (for file storage)
+# [[r2_buckets]]
+# binding = "ASSETS"
+# bucket_name = "elonmuskoffice-assets"
